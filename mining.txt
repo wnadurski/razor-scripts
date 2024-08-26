@@ -1,0 +1,26 @@
+if position 3121 4000
+    sysmsg "Correct position"
+foreach x in moveList
+    if x == "Mine"
+        sysmsg "Mining at index"
+        sysmsg index
+        wait 500
+        while not insysmsg "There is no"
+            if lhandempty
+              dress 'shovel-dress'
+              wait 500
+            endif
+            hotkey 'Use Item in Hand'
+            waitfortarget
+            targetrelloc 0 -1
+            wait 1500
+        endwhile
+    else
+        walk x
+    endif
+
+endfor
+
+else
+    sysmsg "Incorrect position"
+endif
