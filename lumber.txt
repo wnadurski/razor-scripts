@@ -1,0 +1,26 @@
+clearsysmsg
+foreach x in moveListLumber
+    if x == "Mine"
+        wait 500
+        sysmsg "Mining at index {{index}}"
+    while not insysmsg "There's not"
+            if lhandempty
+              dress 'hatchet-dress'
+              wait 500
+            endif
+            hotkey 'Use Item in Hand'
+            waitfortarget
+            targetrelloc 0 1
+            wait 1500
+            if weight > 400
+                lifttype "logs" 1000
+                wait 500
+                droprelloc -1 -1
+                wait 500
+            endif
+        endwhile
+    else
+        walk x
+    endif
+
+endfor

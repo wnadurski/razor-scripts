@@ -1,0 +1,123 @@
+setvar! miningSpotRune 0x40EFF132
+setvar! smeltingSpotRune 0x40EFF135
+setvar! unloadSpotRune 0x40DA3973
+
+setvar! forgeSerial 0x40D8E1DB
+
+walk Left
+walk North
+
+while not position 3121 4000
+    cast 'Recall'
+    waitfortarget
+    target miningSpotRune
+    wait 3000
+endwhile
+
+foreach x in moveList
+    if x == "Mine"
+        sysmsg "Mining at index"
+        sysmsg index
+        wait 500
+        while not insysmsg "There is no"
+            if lhandempty
+              dress 'shovel-dress'
+              wait 500
+            endif
+            hotkey 'Use Item in Hand'
+            waitfortarget
+            targetrelloc 0 -1
+            wait 1500
+        endwhile
+    else
+        walk x
+    endif
+
+endfor
+
+
+while not position 2922 1028
+    cast 'Recall'
+    waitfortarget
+    target smeltingSpotRune
+    wait 3000
+endwhile
+wait 500
+
+walk 'North'
+walk 'North'
+walk 'North'
+walk 'North'
+walk 'North'
+walk 'North'
+walk 'North'
+
+wait 500
+
+if lhandempty
+  dress 'shovel-dress'
+  wait 500
+
+while findtype "iron ore" backpack
+    dclicktype "iron ore"
+    waitfortarget
+    target forgeSerial
+    wait 500
+endwhile
+
+wait 500
+dclick '0x400C1355'
+wait 1000
+dclick '0x40B6830C'
+wait 1000
+dclick '0x400C1355'
+wait 1000
+dclick '0x40B6830C'
+wait 1000
+dclick '0x40B6830C'
+wait 500
+
+
+while not position 2904 1012
+    cast 'Recall'
+    waitfortarget
+    target unloadSpotRune
+    wait 3000
+endwhile
+
+wait 500
+walk 'Up'
+walk 'Up'
+walk 'Up'
+walk 'North'
+walk 'North'
+walk 'North'
+walk 'North'
+walk 'North'
+walk 'Right'
+walk 'Right'
+walk 'Right'
+walk 'Right'
+walk 'Right'
+wait 500
+
+dclick 0x40B3569E
+wait 500
+
+hotkey 'Organizer Agent-05'
+while findtype "iron ingots" backpack
+   wait 300
+    hotkey 'Organizer Agent-05'
+endwhile
+
+wait 6000
+
+
+dclick 0x40C2CE62
+wait 1000
+hotkey 'Restock Agent-05'
+waitfortarget
+target 0x40C2CE62
+wait 6000
+
+loop
